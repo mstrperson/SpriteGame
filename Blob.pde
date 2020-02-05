@@ -15,8 +15,8 @@ class Blob extends Sprite
   {
     // super calls the Sprite(x, y) constructor method.
     super(x, y);
-    this.dx = 1;
-    this.dy = 1.5;
+    //this.dx = 1;
+    //this.dy = 1.5;
     myColor = c;
     radius = r;
   }
