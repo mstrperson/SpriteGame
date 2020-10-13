@@ -3,6 +3,8 @@
  * by default a Sprite starts with <0, 0> velocity.
  * included in the Sprite class are a few standard methods that are useful--see comments
  */
+ScreenMode SCREEN_MODE = ScreenMode.Loop; 
+ 
 abstract class Sprite
 {
   // this Sprite's current location.
@@ -91,6 +93,22 @@ abstract class Sprite
     if(delY != 0) y += (delY / mag) * speed;
   }
   
+  // set the velocity of this sprite to a particular value.
+  void setVelocity(float dx, float dy)
+  {
+    this.dx = dx;
+    this.dy = dy;
+  }
+  
+  // Move this sprite instantly to another location
+  // This DOES NOT check to make sure that you are on the screen
+  void moveTo(float x, float y)
+  {
+    this.x = x;
+    this.y = y;
+    
+  }
+  
   // move this sprite according to it's current velocity vector
   // bounces off the walls
   void move()
@@ -99,22 +117,7 @@ abstract class Sprite
     y += dy;
     
     // make sure we don't go out of bounds
-    if(x < 0)
-    { 
-      x += width;
-    }
-    if(x > width) 
-    {
-      x -= width;
-    }
-    if(y < 0) 
-    {
-      y += height;
-    }
-    if(y > height)
-    {
-      y -= height;
-    }
+    boundaryCheck();
   }
   
   // get the distance between centers of this Sprite and another
@@ -131,25 +134,25 @@ abstract class Sprite
     // If I hit the LEFT arrow, go Left
     if(keyCode == LEFT)
     {
-      dx = -1;
+      dx = -5;
       dy = 0;
     }
     // if I hit the RIGHT arrow, go Right
     else if(keyCode == RIGHT)
     {
-      dx = 1;
+      dx = 5;
       dy = 0;
     }
     // if I hit the UP arrow, go Up
     if(keyCode == UP)
     {
-      dy = -1;
+      dy = -5;
       dx = 0;
     }
     // if I hit the DOWN arrow, go Down
     else if(keyCode == DOWN)
     {
-      dy = 1;
+      dy = 5;
       dx = 0;
     }
     // if I hit the Space Bar, Stop
@@ -163,15 +166,52 @@ abstract class Sprite
     x = x + dx;
     y = y + dy;
     
-    // make sure we don't go out of bounds
-    if(x < 0) x = 0;
-    if(x > width) x = width;
-    if(y < 0) y = 0;
-    if(y > height) y = height;
+    // make sure we don't go out of bounds (uncomment only one of these lines!)
+    boundaryCheck();
+  }
+  
+  void boundaryCheck()
+  {
+    // make sure we don't go out of bounds (uncomment only one of these lines!)
+    switch(SCREEN_MODE)
+    {
+      case Loop:   boundaryLoop(); break;
+      case Bounce: boundaryBounce(); break;
+      case Stop:   boundaryStop(); break;
+      default:     break;
+    }
+  }
+  
+  void boundaryLoop()
+  {
+    if(x < 0) x += width;
+    if(x > width) x -= width;
+    if(y < 0) y += height;
+    if(y > height) y -= height;
+  }
+  
+  void boundaryBounce()
+  {
+    if(x < 0 || x > width) dx = -dx;    
+    if(y < 0 || y > height) dy = -dy;
+  }
+  
+  void boundaryStop()
+  {
+    if(x < 0 || x > width) dx = 0;    
+    if(y < 0 || y > height) dy = 0;
   }
   
   // a Sprite itself is abstract and does not actually know
   // what it looks like.  This method must be overriden in 
   // any classes which /are/ Sprites.
   abstract void drawSprite();
+}
+
+// Easy way to set the behavior at the screen boundary.
+public enum ScreenMode
+{
+   Loop,
+   Bounce,
+   Stop
 }

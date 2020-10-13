@@ -15,8 +15,8 @@ class Blob extends Sprite
   {
     // super calls the Sprite(x, y) constructor method.
     super(x, y);
-    this.dx = 1;
-    this.dy = 1.5;
+    this.dx = 0;
+    this.dy = 0;
     myColor = c;
     radius = r;
   }
@@ -29,18 +29,10 @@ class Blob extends Sprite
     radius = r;
   }
   
-  // I can override the default Sprite.move() method by writing a new one here
-  // this one will "bounce off of" a particular color in a boring way...
-  void move()
+  // Check to see if two blobs are touching
+  boolean collidesWith(Blob other)
   {
-    if(this.collidesWith(color(128, 0, 200)))
-    {
-      dx *= -1;
-      dy *= -1;
-    }
-    
-    // because I don't want to rewrite all the code in the Sprite.move() method, I can call it here using "super"
-    super.move();
+    return (this.distanceTo(other) <= (this.radius+other.radius)/2);    
   }
   
   // This is the method that is /absolutely/ required.
