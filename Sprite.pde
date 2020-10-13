@@ -45,10 +45,22 @@ abstract class Sprite
     float speed = sqrt(dx*dx + dy*dy);
     float delX = other.x - this.x;
     float delY = other.y - this.y;
+    
+    if(SCREEN_MODE == ScreenMode.Loop)
+    {
+      if(delX < -(width / 2))  delX += width;
+      if(delX > (width / 2))   delX -= width;
+      
+      if(delY < -(height / 2)) delY += height;
+      if(delY > (height / 2))  delY -= height;
+    }
+    
     float mag = sqrt(delX*delX + delY*delY);
     
     if(delX != 0) x += (delX / mag) * speed;
     if(delY != 0) y += (delY / mag) * speed;
+    
+    boundaryCheck();
   }
   
   // make this Sprite move at the speed := |<dx, dy>| 
@@ -57,8 +69,19 @@ abstract class Sprite
   void chase(Sprite other, float minFollowDistance)
   {
     float speed = sqrt(dx*dx + dy*dy);
+    
     float delX = other.x - this.x;
     float delY = other.y - this.y;
+    
+    if(SCREEN_MODE == ScreenMode.Loop)
+    {
+      if(delX < -(width / 2))  delX += width;
+      if(delX > (width / 2))   delX -= width;
+      
+      if(delY < -(height / 2)) delY += height;
+      if(delY > (height / 2))  delY -= height;
+    }
+    
     float mag = sqrt(delX*delX + delY*delY);
     
     if(mag > 0 && mag <= minFollowDistance) 
@@ -78,6 +101,8 @@ abstract class Sprite
     
     if(delX != 0) x += (delX / mag) * speed;
     if(delY != 0) y += (delY / mag) * speed;
+    
+    boundaryCheck();
   }
   
   // make this Sprite move at the speed := |<dx, dy>|

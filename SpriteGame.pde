@@ -1,7 +1,9 @@
 
 // this is your player, they're a blob and they're kinda boring.
 Blob player;
-Blob obstacle;
+Block obstacle;
+
+
 
 void setup()
 {
@@ -10,8 +12,9 @@ void setup()
   // Blob parameters are: 
   // x (px), y (px), radius (px), 
   // x-speed (px/frame), y-speed (px/frame), and color.
-  player = new Blob(100, 100, 50, 1.25, 1.5, color(255, 0, 180));
-  obstacle = new Blob(400, 200, 10, 1.25, 1.5, color(128, 0, 200));
+  player = new Blob(100, 100, 20, color(255, 0, 180));
+  obstacle = new Block(400, 200, 30, 20, color(128, 0, 200));
+  obstacle.setVelocity(2, 0);
 }
 
 void draw()
