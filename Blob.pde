@@ -7,8 +7,8 @@
 class Blob extends Sprite
 {
   // Blobs have a Radius and a color
-  float radius;
-  color myColor;
+  protected float radius;
+  protected color myColor;
   
   // Create a blob with default velocity.
   Blob(float x, float y, float r, color c)
@@ -65,8 +65,8 @@ class Blob extends Sprite
 // Block is like a blob except it is a rectangle!
 public class Block extends Blob
 {
-  float w; // width
-  float h; // height
+  protected float w; // width
+  protected float h; // height
   
   Block(float x, float y, float w, float h, color c)
   {

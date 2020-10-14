@@ -8,10 +8,10 @@ ScreenMode SCREEN_MODE = ScreenMode.Loop;
 abstract class Sprite
 {
   // this Sprite's current location.
-  float x, y;
+  protected float x, y;
   
   // this Sprite's current velocity vector.
-  float dx, dy;
+  protected float dx, dy;
   
   // initialize a Sprite at a given coordinate.
   Sprite(float x, float y)
