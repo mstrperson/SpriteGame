@@ -195,7 +195,7 @@ abstract class Sprite
     boundaryCheck();
   }
   
-  void boundaryCheck()
+  private void boundaryCheck()
   {
     // make sure we don't go out of bounds (uncomment only one of these lines!)
     switch(SCREEN_MODE)
