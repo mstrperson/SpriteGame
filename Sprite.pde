@@ -207,7 +207,7 @@ abstract class Sprite
     }
   }
   
-  void boundaryLoop()
+  private void boundaryLoop()
   {
     if(x < 0) x += width;
     if(x > width) x -= width;
@@ -215,13 +215,13 @@ abstract class Sprite
     if(y > height) y -= height;
   }
   
-  void boundaryBounce()
+  private void boundaryBounce()
   {
     if(x < 0 || x > width) dx = -dx;    
     if(y < 0 || y > height) dy = -dy;
   }
   
-  void boundaryStop()
+  private void boundaryStop()
   {
     if(x < 0 || x > width) dx = 0;    
     if(y < 0 || y > height) dy = 0;
