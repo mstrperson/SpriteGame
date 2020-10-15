@@ -23,6 +23,12 @@ Sprite(float x, float y, float dx, float dy)
 ```
 Initialize a Sprite at the given location with a given velocity.
 
+## Abstract Methods
+```
+abstract void drawSprite()
+```
+This method must be implemented by classes that extend the Sprite. This is the code that actually draws the Sprite itself
+
 ## Basic Methods
 ```
 boolean collidesWith(color c)
