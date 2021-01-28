@@ -54,6 +54,7 @@ void draw()
       toDelete.add(ob);
     }
   }
+  
   // actally delete the obstacles
   for(Obstacle deleteMe : toDelete)
   {
